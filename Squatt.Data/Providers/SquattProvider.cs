@@ -9,31 +9,24 @@ namespace Piec.Info.Squatt.Data.Providers
     /// </summary>
     public abstract class SquattProvider
     {
-        #region Identifier enclosing characters
+        protected string _mainTableAlias = "m";
 
-        protected char _identifierEnclosingStartChar;
-        protected char _identifierEnclosingEndChar;
+        #region Identifier enclosing characters
 
         /// <summary>
         /// Gets a start quoting symbol for names that should be treated as identifiers.
         /// </summary>
-        public char IdentifierEnclosingStartChar
+        public abstract string IdentifierEnclosingStartChar
         {
-            get
-            {
-                return _identifierEnclosingStartChar;
-            }
+            get;
         }
 
         /// <summary>
         /// Gets an end quoting symbol for names that should be treated as identifiers.
         /// </summary>
-        public char IdentifierEnclosingEndChar
+        public abstract string IdentifierEnclosingEndChar
         {
-            get
-            {
-                return _identifierEnclosingEndChar;
-            }
+            get;
         }
 
         #endregion
@@ -51,6 +44,16 @@ namespace Piec.Info.Squatt.Data.Providers
         public virtual string GetSelectQuery(string tableName, string keyFieldName, long id, List<string> fieldNames)
         {
             return string.Format("{0} WHERE {1} = {2}", GetGeneralSelectQuery(tableName, keyFieldName, fieldNames), GetQuotedIdentifierName(keyFieldName), id);
+        }
+
+        public virtual string GetSelectAllQuery(string tableName, string keyFieldName, List<string> fieldNames)
+        {
+            return GetGeneralSelectQuery(tableName, keyFieldName, fieldNames);
+        }
+
+        public virtual string GetSelectConditionalQuery(string tableName, string keyFieldName, List<string> fieldNames, string condition)
+        {
+            return string.Format("{0} WHERE {1}", GetGeneralSelectQuery(tableName, keyFieldName, fieldNames), condition);
         }
 
         #endregion
@@ -72,7 +75,7 @@ namespace Piec.Info.Squatt.Data.Providers
         /// <returns>Concatenated identifier name.</returns>
         private string GetQuotedIdentifierName(string identifierName)
         {
-            return string.Concat(_identifierEnclosingStartChar, identifierName, _identifierEnclosingEndChar);
+            return string.Concat(IdentifierEnclosingStartChar, identifierName, IdentifierEnclosingEndChar);
         }
 
         /// <summary>
@@ -85,6 +88,8 @@ namespace Piec.Info.Squatt.Data.Providers
         private string GetGeneralSelectQuery(string tableName, string keyFieldName, List<string> fieldNames)
         {
             StringBuilder fields = new StringBuilder();
+            fields.Append(_mainTableAlias);
+            fields.Append(".");
             fields.Append(GetQuotedIdentifierName(keyFieldName));
             fields.Append(" AS '");
             fields.Append(keyFieldName);
@@ -94,13 +99,15 @@ namespace Piec.Info.Squatt.Data.Providers
             {
                 fields.Append(", ");
 
+                fields.Append(_mainTableAlias);
+                fields.Append(".");
                 fields.Append(GetQuotedIdentifierName(fieldName));
                 fields.Append(" AS '");
                 fields.Append(fieldName);
                 fields.Append("'");
             }
 
-            return string.Format("SELECT {0} FROM {1}", fields, GetQuotedIdentifierName(tableName));
+            return string.Format("SELECT {0} FROM {1} {2}", fields, GetQuotedIdentifierName(tableName), _mainTableAlias);
         }
 
         #endregion
