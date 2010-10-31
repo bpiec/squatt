@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Data", "Squatt.Data\Squatt.Data.csproj", "{0C697C92-CD28-4897-9249-33D6934B3642}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Providers.SQLite", "Squatt.Providers.SQLite\Squatt.Providers.SQLite.csproj", "{84769AAD-3E75-4700-A466-7F95DDC30DB9}"
@@ -10,22 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Examples.Orders", "Squatt.Examples.Orders\Squatt.Examples.Orders.csproj", "{49270B8F-D821-4B95-9087-DEEE979A50F9}"
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 5
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Squatt.Data\\Squatt.Data.csproj
-		SccLocalPath1 = .
-		SccProjectFilePathRelativizedFromConnection1 = Squatt.Data\\
-		SccProjectUniqueName2 = Squatt.Providers.SQLite\\Squatt.Providers.SQLite.csproj
-		SccLocalPath2 = .
-		SccProjectFilePathRelativizedFromConnection2 = Squatt.Providers.SQLite\\
-		SccProjectUniqueName3 = Squatt.Examples.WinApp\\Squatt.Examples.WinApp.csproj
-		SccLocalPath3 = .
-		SccProjectFilePathRelativizedFromConnection3 = Squatt.Examples.WinApp\\
-		SccProjectUniqueName4 = Squatt.Examples.Orders\\Squatt.Examples.Orders.csproj
-		SccLocalPath4 = .
-		SccProjectFilePathRelativizedFromConnection4 = Squatt.Examples.Orders\\
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
