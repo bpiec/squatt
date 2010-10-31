@@ -89,11 +89,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Squatt.Data\Squatt.Data.csproj">
+    <ProjectReference Include="..\Dabarto.Data.Squatt.Data\Dabarto.Data.Squatt.Data.csproj">
       <Project>{0C697C92-CD28-4897-9249-33D6934B3642}</Project>
       <Name>Squatt.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Squatt.Examples.Orders\Squatt.Examples.Orders.csproj">
+    <ProjectReference Include="..\Dabarto.Data.Squatt.Examples.Orders\Dabarto.Data.Squatt.Examples.Orders.csproj">
       <Project>{49270B8F-D821-4B95-9087-DEEE979A50F9}</Project>
       <Name>Squatt.Examples.Orders</Name>
     </ProjectReference>

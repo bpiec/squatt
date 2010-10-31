@@ -60,7 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Squatt.Data\Squatt.Data.csproj">
+    <ProjectReference Include="..\Dabarto.Data.Squatt.Data\Dabarto.Data.Squatt.Data.csproj">
       <Project>{0C697C92-CD28-4897-9249-33D6934B3642}</Project>
       <Name>Squatt.Data</Name>
     </ProjectReference>
