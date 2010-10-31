@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Data", "Squatt.Data\Squatt.Data.csproj", "{0C697C92-CD28-4897-9249-33D6934B3642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Providers.SQLite", "Squatt.Providers.SQLite\Squatt.Providers.SQLite.csproj", "{84769AAD-3E75-4700-A466-7F95DDC30DB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Examples.WinApp", "Squatt.Examples.WinApp\Squatt.Examples.WinApp.csproj", "{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squatt.Examples.Orders", "Squatt.Examples.Orders\Squatt.Examples.Orders.csproj", "{49270B8F-D821-4B95-9087-DEEE979A50F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C697C92-CD28-4897-9249-33D6934B3642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C697C92-CD28-4897-9249-33D6934B3642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C697C92-CD28-4897-9249-33D6934B3642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C697C92-CD28-4897-9249-33D6934B3642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49270B8F-D821-4B95-9087-DEEE979A50F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49270B8F-D821-4B95-9087-DEEE979A50F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49270B8F-D821-4B95-9087-DEEE979A50F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49270B8F-D821-4B95-9087-DEEE979A50F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
