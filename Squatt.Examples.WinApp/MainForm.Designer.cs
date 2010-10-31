@@ -1,4 +1,4 @@
-﻿namespace Squatt.Examples.WinApp
+﻿namespace Dabarto.Data.Squatt.Examples.WinApp
 {
     partial class MainForm
     {

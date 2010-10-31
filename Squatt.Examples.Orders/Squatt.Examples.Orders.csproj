@@ -8,8 +8,8 @@
     <ProjectGuid>{49270B8F-D821-4B95-9087-DEEE979A50F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Piec.Info.Squatt.Examples.Orders</RootNamespace>
-    <AssemblyName>Squatt.Examples.Orders</AssemblyName>
+    <RootNamespace>Dabarto.Data.Squatt.Examples.Orders</RootNamespace>
+    <AssemblyName>Dabarto.Data.Squatt.Examples.Orders</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

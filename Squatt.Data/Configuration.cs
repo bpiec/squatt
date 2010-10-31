@@ -1,4 +1,4 @@
-﻿namespace Piec.Info.Squatt.Data
+﻿namespace Dabarto.Data.Squatt.Data
 {
     /// <summary>
     /// Configuration for Squatt.

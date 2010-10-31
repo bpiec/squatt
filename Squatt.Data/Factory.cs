@@ -4,12 +4,12 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 
-using Piec.Info.Squatt.Data.Attributes;
-using Piec.Info.Squatt.Data.Exceptions;
-using Piec.Info.Squatt.Data.Providers;
-using Piec.Info.Squatt.Data.Utils;
+using Dabarto.Data.Squatt.Data.Attributes;
+using Dabarto.Data.Squatt.Data.Exceptions;
+using Dabarto.Data.Squatt.Data.Providers;
+using Dabarto.Data.Squatt.Data.Utils;
 
-namespace Piec.Info.Squatt.Data
+namespace Dabarto.Data.Squatt.Data
 {
     /// <summary>
     /// A class providing some basic operations on a database.

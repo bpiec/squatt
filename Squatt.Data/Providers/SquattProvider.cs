@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 
-namespace Piec.Info.Squatt.Data.Providers
+namespace Dabarto.Data.Squatt.Data.Providers
 {
     /// <summary>
     /// An abstract class for a database provider.

@@ -8,8 +8,8 @@
     <ProjectGuid>{A97CD8C1-B5C8-4BBE-BC77-3AA328618E19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Piec.Info.Squatt.Examples.WinApp</RootNamespace>
-    <AssemblyName>Squatt.Examples.WinApp</AssemblyName>
+    <RootNamespace>Dabarto.Data.Squatt.Examples.WinApp</RootNamespace>
+    <AssemblyName>Dabarto.Data.Squatt.Examples.WinApp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

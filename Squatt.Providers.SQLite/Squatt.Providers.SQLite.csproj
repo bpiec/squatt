@@ -8,8 +8,8 @@
     <ProjectGuid>{84769AAD-3E75-4700-A466-7F95DDC30DB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Piec.Info.Squatt.Data.Providers</RootNamespace>
-    <AssemblyName>Squatt.Providers.SQLite</AssemblyName>
+    <RootNamespace>Dabarto.Data.Squatt.Data.Providers</RootNamespace>
+    <AssemblyName>Dabarto.Data.Squatt.Data.Providers</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

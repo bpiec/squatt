@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Piec.Info.Squatt.Data.Utils
+namespace Dabarto.Data.Squatt.Data.Utils
 {
     /// <summary>
     /// Some extension methods to .NET classes.

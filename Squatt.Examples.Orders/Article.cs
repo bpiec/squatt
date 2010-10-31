@@ -1,6 +1,6 @@
-﻿using Piec.Info.Squatt.Data.Attributes;
+﻿using Dabarto.Data.Squatt.Data.Attributes;
 
-namespace Piec.Info.Squatt.Examples.Orders
+namespace Dabarto.Data.Squatt.Examples.Orders
 {
     public class Article
     {

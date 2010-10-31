@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Piec.Info.Squatt.Data.Exceptions
+namespace Dabarto.Data.Squatt.Data.Exceptions
 {
     public class SquattException : Exception
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Squatt.Examples.WinApp
+namespace Dabarto.Data.Squatt.Examples.WinApp
 {
     static class Program
     {

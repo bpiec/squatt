@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 
-namespace Piec.Info.Squatt.Data.Providers
+namespace Dabarto.Data.Squatt.Data.Providers
 {
     public class SQLiteSquattProvider : SquattProvider
     {

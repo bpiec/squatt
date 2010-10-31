@@ -8,8 +8,8 @@
     <ProjectGuid>{0C697C92-CD28-4897-9249-33D6934B3642}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Piec.Info.Squatt.Data</RootNamespace>
-    <AssemblyName>Squatt.Data</AssemblyName>
+    <RootNamespace>Dabarto.Data.Squatt.Data</RootNamespace>
+    <AssemblyName>Dabarto.Data.Squatt.Data</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>

@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Piec.Info.Squatt.Examples.Orders;
-using Piec.Info.Squatt.Data;
+using Dabarto.Data.Squatt.Examples.Orders;
+using Dabarto.Data.Squatt.Data;
 
-namespace Squatt.Examples.WinApp
+namespace Dabarto.Data.Squatt.Examples.WinApp
 {
     public partial class MainForm : Form
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Piec.Info.Squatt.Data.Attributes
+namespace Dabarto.Data.Squatt.Data.Attributes
 {
     /// <summary>
     /// An attribute that can be placed on a class to specify a database table name.
