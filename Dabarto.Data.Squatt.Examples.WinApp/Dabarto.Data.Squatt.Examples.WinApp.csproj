@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dabarto.Data.Squatt.Examples.WinApp</RootNamespace>
     <AssemblyName>Dabarto.Data.Squatt.Examples.WinApp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -20,6 +20,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +79,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,7 +99,7 @@
       <Project>{49270B8F-D821-4B95-9087-DEEE979A50F9}</Project>
       <Name>Squatt.Examples.Orders</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Squatt.Providers.SQLite\Squatt.Providers.SQLite.csproj">
+    <ProjectReference Include="..\Dabarto.Data.Squatt.Providers.SQLite\Dabarto.Data.Squatt.Providers.SQLite.csproj">
       <Project>{84769AAD-3E75-4700-A466-7F95DDC30DB9}</Project>
       <Name>Squatt.Providers.SQLite</Name>
     </ProjectReference>
