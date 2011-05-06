@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabarto.Data.Squatt.Example
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabarto.Data.Squatt.Providers.SQLite", "Dabarto.Data.Squatt.Providers.SQLite\Dabarto.Data.Squatt.Providers.SQLite.csproj", "{84769AAD-3E75-4700-A466-7F95DDC30DB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabarto.Data.Squatt.Providers.MySQL", "Dabarto.Data.Squatt.Providers.MySQL\Dabarto.Data.Squatt.Providers.MySQL.csproj", "{29E56833-813C-41CC-9A3F-449C789FF9FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84769AAD-3E75-4700-A466-7F95DDC30DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E56833-813C-41CC-9A3F-449C789FF9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E56833-813C-41CC-9A3F-449C789FF9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E56833-813C-41CC-9A3F-449C789FF9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E56833-813C-41CC-9A3F-449C789FF9FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
