@@ -25,18 +25,24 @@ namespace Dabarto.Data.Squatt.Data.Providers
         {
         }
 
-        public override void ExecuteNonQuery(string query)
+        public override int ExecuteNonQuery(string query)
         {
-            throw new System.NotImplementedException();
+			using (var connection = new SQLiteConnection(Configuration.ConnectionString))
+			{
+				var command = connection.CreateCommand();
+				command.CommandType = CommandType.Text;
+				command.CommandText = query;
+				return command.ExecuteNonQuery();
+			}
         }
 
         public override DataTable ExecuteQuery(string query)
         {
             DataTable dataTable = new DataTable();
 
-            using (SQLiteConnection connection = new SQLiteConnection(Configuration.ConnectionString))
+            using (var connection = new SQLiteConnection(Configuration.ConnectionString))
             {
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connection);
+                var adapter = new SQLiteDataAdapter(query, connection);
                 adapter.Fill(dataTable);
             }
 

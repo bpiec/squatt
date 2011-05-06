@@ -60,7 +60,7 @@ namespace Dabarto.Data.Squatt.Data.Providers
 
         #region Database methods
 
-        public abstract void ExecuteNonQuery(string query);
+        public abstract int ExecuteNonQuery(string query);
 
         public abstract DataTable ExecuteQuery(string query);
 
