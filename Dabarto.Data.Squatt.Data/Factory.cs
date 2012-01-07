@@ -8,6 +8,7 @@ using Dabarto.Data.Squatt.Data.Attributes;
 using Dabarto.Data.Squatt.Data.Exceptions;
 using Dabarto.Data.Squatt.Data.Providers;
 using Dabarto.Data.Squatt.Data.Utils;
+using System.Linq.Expressions;
 
 namespace Dabarto.Data.Squatt.Data
 {
@@ -23,8 +24,11 @@ namespace Dabarto.Data.Squatt.Data
         private Type _type;
 
         private string _tableName;
+		private string _viewName;
         private string _keyField;
         private List<string> _fields; // fields to choose from database
+		private List<string> _viewFields; // fields to choose from view
+		private Dictionary<string, object> _values; // fields to choose from database
 
         #endregion
 
@@ -39,13 +43,16 @@ namespace Dabarto.Data.Squatt.Data
             _type = typeof(T);
 
             _tableName = null;
+			_viewName = null;
             _keyField = null;
             _fields = null;
+			_values = null;
+			_viewFields = null;
         }
 
         #endregion
 
-        #region Select methods
+        #region Select Methods
 
         /// <summary>
         /// Selects single row from a database.
@@ -54,7 +61,7 @@ namespace Dabarto.Data.Squatt.Data
         /// <returns>Single row mapped to object of a given type.</returns>
         public virtual T Select(int id)
         {
-            RefactorObject();            
+            RefactorObject(default(T));            
 
             // Getting query and executing it
             string query = Provider.GetSelectQuery(_tableName, _keyField, id, _fields);
@@ -75,13 +82,24 @@ namespace Dabarto.Data.Squatt.Data
         /// Selects all rows from a database.
         /// </summary>
         /// <returns>All rows mapped to objects of a given type.</returns>
-        public virtual List<T> SelectAll()
+        public virtual List<T> SelectAll(bool fromView = false)
         {
-            RefactorObject();
+			RefactorObject(default(T));
 
             // Getting query and executing it
-            string query = Provider.GetSelectAllQuery(_tableName, _keyField, _fields);
-            DataTable dataTable = Provider.ExecuteQuery(query);
+			var query = string.Empty;
+			if (fromView && !string.IsNullOrEmpty(_viewName) && _viewFields != null)
+			{
+				var tableName = _viewName;
+				var fields = _fields;
+				fields.AddRange(_viewFields);
+				query = Provider.GetSelectAllQuery(tableName, _keyField, fields);
+			}
+			else
+			{
+				query = Provider.GetSelectAllQuery(_tableName, _keyField, _fields);
+			}
+            var dataTable = Provider.ExecuteQuery(query);
 
             // Making instances...
             return MakeInstances(dataTable);
@@ -92,13 +110,30 @@ namespace Dabarto.Data.Squatt.Data
         /// </summary>
         /// <param name="condition">Condition to select rows by.</param>
         /// <returns>Matched rows mapped to objects of a given type.</returns>
-        public virtual List<T> SelectConditional(string condition)
+        public virtual List<T> SelectConditional(string condition, bool fromView = false)
         {
-            RefactorObject();
+			// change to SelectAll if empty condition was specified
+			if (string.IsNullOrWhiteSpace(condition))
+			{
+				return SelectAll(fromView);
+			}
+
+			RefactorObject(default(T));
 
             // Getting query and executing it
-            string query = Provider.GetSelectConditionalQuery(_tableName, _keyField, _fields, condition);
-            DataTable dataTable = Provider.ExecuteQuery(query);
+			var query = string.Empty;
+			if (fromView && !string.IsNullOrEmpty(_viewName) && _viewFields != null)
+			{
+				var tableName = _viewName;
+				var fields = _fields;
+				fields.AddRange(_viewFields);
+				query = Provider.GetSelectConditionalQuery(tableName, _keyField, fields, condition);
+			}
+			else
+			{
+				query = Provider.GetSelectConditionalQuery(_tableName, _keyField, _fields, condition);
+			}
+            var dataTable = Provider.ExecuteQuery(query);
 
             // Making instances...
             return MakeInstances(dataTable);
@@ -106,9 +141,82 @@ namespace Dabarto.Data.Squatt.Data
 
         #endregion
 
-        #region Private helper methods and properties
+		#region Insert Method
 
-        /// <summary>
+		public virtual int Insert(T obj)
+		{
+			RefactorObject(obj);
+
+			// Getting query and executing it
+			string query = Provider.GetInsertQuery(_tableName, _keyField, _values);
+			return Provider.PerformInsert(query);
+		}
+
+		#endregion
+
+		#region Update Methods
+
+		public void Update(T obj, params Expression<Func<T, object>>[] properties)
+		{
+			RefactorObject(obj);
+
+			var values = default(Dictionary<string, object>);
+			if (properties != null && properties.Length > 0)
+			{
+				values = new Dictionary<string, object>();
+				foreach (var property in properties)
+				{
+					var propertyName = string.Empty;
+
+					if (property.Body is MemberExpression)
+					{
+						propertyName = ((MemberExpression)property.Body).Member.Name;
+					}
+					else if (property.Body is UnaryExpression)
+					{
+						propertyName = ((MemberExpression)((UnaryExpression)property.Body).Operand).Member.Name;
+					}
+
+					var propertyValue = _values[propertyName];
+
+					values.Add(propertyName, propertyValue);
+				}
+				if (!values.ContainsKey(_keyField))
+				{
+					// always add key name-value
+					values.Add(_keyField, _values[_keyField]);
+				}
+			}
+			else
+			{
+				values = _values;
+			}
+
+			// Getting query and executing it
+			string query = Provider.GetUpdateQuery(_tableName, _keyField, values);
+			Provider.ExecuteNonQuery(query);
+		}
+
+		#endregion
+
+		public string EscapeString(string str)
+		{
+			return Provider.EscapeString(str);
+		}
+
+		public int ExecuteNonQuery(string query)
+		{
+			return Provider.ExecuteNonQuery(query);
+		}
+
+		public DataTable ExecuteQuery(string query)
+		{
+			return Provider.ExecuteQuery(query);
+		}
+
+		#region Private helper methods and properties
+
+		/// <summary>
         /// Gets the provider class.
         /// </summary>
         private SquattProvider Provider
@@ -130,7 +238,7 @@ namespace Dabarto.Data.Squatt.Data
                     }
 
                     // Trying in all libraries in a dll's directory
-                    var files = Directory.GetFiles(Path.GetDirectoryName(typeof(Factory<T>).Assembly.Location), "*.dll");
+                    var files = Directory.GetFiles(new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)).LocalPath, "*.dll");
                     foreach (var dll in files)
                     {
                         Assembly assembly = Assembly.LoadFile(dll);
@@ -164,23 +272,39 @@ namespace Dabarto.Data.Squatt.Data
         /// <summary>
         /// Gets some crucial information from class's attributes.
         /// </summary>
-        private void RefactorObject()
+        private void RefactorObject(T obj)
         {
             // Do we need to refactor?
-            if (_fields == null || _keyField == null || _tableName == null)
+            if (_fields == null || _values == null || _keyField == null || _tableName == null)
             {
                 _fields = new List<string>();
+				_viewFields = new List<string>();
+				_values = new Dictionary<string, object>();
 
                 object[] attributes = _type.GetCustomAttributes(true);
                 foreach (var attribute in attributes)
                 {
                     // We're trying to get the table name
-                    if (attribute is DbTableAttribute)
+                    if (_tableName == null && attribute is DbTableAttribute)
                     {
                         DbTableAttribute tableAttribute = (DbTableAttribute)attribute;
                         _tableName = tableAttribute.TableName;
-                        break;
+						if (_viewName != null)
+						{
+							break;
+						}
                     }
+
+					// Maybe there is a view name?
+					if (_viewName == null && attribute is DbViewAttribute)
+					{
+						var viewAttribute = (DbViewAttribute)attribute;
+						_viewName = viewAttribute.ViewName;
+						if (_tableName != null)
+						{
+							break;
+						}
+					}
                 }
 
                 if (_tableName == null)
@@ -195,7 +319,7 @@ namespace Dabarto.Data.Squatt.Data
                     throw new SquattException("Unable to find table name attribute.");
                 }
 
-                // Getting fields (from properties)
+                // Getting fields (from properties) and values
                 foreach (var mi in _type.GetMembers())
                 {
                     if (mi.MemberType == MemberTypes.Property)
@@ -207,13 +331,26 @@ namespace Dabarto.Data.Squatt.Data
                             {
                                 // Key field
                                 _keyField = mi.Name;
+								if (obj != null)
+								{
+									_values.Add(mi.Name, GetValue(obj, mi.Name));
+								}
                                 break;
                             }
                             else if (attribute is DbFieldAttribute)
                             {
                                 // Other field
                                 _fields.Add(mi.Name);
+								if (obj != null)
+								{
+									_values.Add(mi.Name, GetValue(obj, mi.Name));
+								}
                             }
+							else if (attribute is DbViewFieldAttribute)
+							{
+								// View field
+								_viewFields.Add(mi.Name);
+							}
                         }
                     }
                 }
@@ -225,6 +362,12 @@ namespace Dabarto.Data.Squatt.Data
                 }
             }
         }
+
+		private object GetValue(T obj, string propertyName)
+		{
+			PropertyInfo pi = typeof(T).GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+			return pi.GetValue(obj, null);
+		}
 
         /// <summary>
         /// Makes instances from DataTable.

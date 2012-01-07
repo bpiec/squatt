@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace Dabarto.Data.Squatt.Data.Providers
 {
-	public class SQLiteSquattProvider : SquattProvider
+	public class MySQLSquattProvider : SquattProvider
 	{
 		public override string IdentifierEnclosingStartChar
 		{
@@ -21,7 +21,7 @@ namespace Dabarto.Data.Squatt.Data.Providers
 			}
 		}
 
-		public SQLiteSquattProvider()
+		public MySQLSquattProvider()
 		{
 		}
 
@@ -29,6 +29,7 @@ namespace Dabarto.Data.Squatt.Data.Providers
 		{
 			using (var connection = new MySqlConnection(Configuration.ConnectionString))
 			{
+				connection.Open();
 				var command = connection.CreateCommand();
 				command.CommandType = CommandType.Text;
 				command.CommandText = query;
@@ -47,6 +48,40 @@ namespace Dabarto.Data.Squatt.Data.Providers
 			}
 
 			return dataTable;
+		}
+
+		public override int PerformInsert(string query)
+		{
+			using (var connection = new MySqlConnection(Configuration.ConnectionString))
+			{
+				connection.Open();
+				var transaction = connection.BeginTransaction();
+
+				try
+				{
+					var command = connection.CreateCommand();
+					command.CommandType = CommandType.Text;
+					command.CommandText = query;
+					command.ExecuteNonQuery();
+
+					command.CommandText = "SELECT LAST_INSERT_ID();";
+					var result = command.ExecuteScalar();
+
+					transaction.Commit();
+
+					return int.Parse(result.ToString());
+				}
+				catch
+				{
+					transaction.Rollback();
+					throw;
+				}
+			}
+		}
+
+		public override string EscapeString(string str)
+		{
+			return MySqlHelper.EscapeString(str);
 		}
 	}
 }

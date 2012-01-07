@@ -48,5 +48,39 @@ namespace Dabarto.Data.Squatt.Data.Providers
 
             return dataTable;
         }
+
+		public override int PerformInsert(string query)
+		{
+			using (var connection = new SQLiteConnection(Configuration.ConnectionString))
+			{
+				connection.Open();
+				var transaction = connection.BeginTransaction();
+
+				try
+				{
+					var command = connection.CreateCommand();
+					command.CommandType = CommandType.Text;
+					command.CommandText = query;
+					command.ExecuteNonQuery();
+
+					command.CommandText = "SELECT LAST_INSERT_ROWID();";
+					var result = command.ExecuteScalar();
+
+					transaction.Commit();
+
+					return int.Parse(result.ToString());
+				}
+				catch
+				{
+					transaction.Rollback();
+					throw;
+				}
+			}
+		}
+
+		public override string EscapeString(string str)
+		{
+			return System.Security.SecurityElement.Escape(str);
+		}
     }
 }
